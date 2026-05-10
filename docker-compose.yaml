@@ -1,0 +1,8 @@
+services:
+  camel-quarkus:
+    image: ghcr.io/rmortale/camel-quarkus-artemis:main
+    environment:
+      CAMEL_ROUTE_TEMPLATE_4__INQUEUE: quarkin4
+      CAMEL_ROUTE_TEMPLATE_4__OUTQUEUE: quarkout4
+      CAMEL_ROUTE_TEMPLATE_4__TEMPLATE_ID: uppercaseTransformation
+      QUARKUS_LOG_CATEGORY_UPPERCASETRANSFORMATION_LEVEL: DEBUG
