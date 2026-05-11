@@ -10,12 +10,10 @@ public class CamelRoutes extends RouteBuilder {
   @Override
   public void configure() throws Exception {
 
-    // from("jms:quarkusin?lazyCreateTransactionManager=false&transacted=true&cacheLevelName=CACHE_CONSUMER")
-    //     .log("Hello ${body}")
-    //     .transform().simple("${uppercase()}")
-    //     .to("jms:quarkusout")
-    //     .throwException(new Exception("test exception"));
-
+    // templatedRoute("extractBodyTransformation")
+    // .parameter("inqueue", "extractin")
+    // .parameter("outqueue", "extractout")
+    // .parameter("splitExpr", "/company/address");
   }
 
 }
