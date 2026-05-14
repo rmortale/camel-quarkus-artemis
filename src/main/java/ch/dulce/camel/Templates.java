@@ -34,7 +34,7 @@ public class Templates extends EndpointRouteBuilder {
           .advanced().lazyCreateTransactionManager(false))
         .transform().simple(MESSAGE)
         .log(LoggingLevel.DEBUG, "wrapbodyTransformation", "${body}")
-        .to("jms:{{outqueue}}");
+        .to(jms("{{outqueue}}"));
 
     routeTemplate("uppercaseTransformation")
         .templateParameter("inqueue")
@@ -47,7 +47,7 @@ public class Templates extends EndpointRouteBuilder {
             .advanced().lazyCreateTransactionManager(false))
         .transform().simple("${uppercase()}")
         .log(LoggingLevel.DEBUG, "uppercaseTransformation", "${body}")
-        .to("jms:{{outqueue}}");
+        .to(jms("{{outqueue}}"));
 
     routeTemplate("extractBodyTransformation")
         .templateParameter("inqueue")
@@ -61,7 +61,7 @@ public class Templates extends EndpointRouteBuilder {
             .advanced().lazyCreateTransactionManager(false))
         .split().xtokenize("{{splitExpr}}", 'u', new Namespaces())
         .log(LoggingLevel.DEBUG, "extractBodyTransformation", "${body}")
-        .to("jms:{{outqueue}}");
+        .to(jms("{{outqueue}}"));
   }
 
 }
