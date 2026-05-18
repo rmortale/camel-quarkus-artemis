@@ -9,6 +9,7 @@ import org.apache.camel.support.builder.Namespaces;
 public class Templates extends EndpointRouteBuilder {
 
   private static final String CACHE_LEVEL_NAME = "CACHE_CONSUMER";
+  private static final String DEFAULT_MAX_CONSUMERS = "10";
 
   private static final String MESSAGE = """
       <object>
@@ -26,7 +27,7 @@ public class Templates extends EndpointRouteBuilder {
     routeTemplate("wrapbodyTransformation")
         .templateParameter("inqueue")
         .templateParameter("outqueue")
-        .templateParameter("maxConsumers", "5")
+        .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
         .from(jms("{{inqueue}}")
           .transacted(true)
           .cacheLevelName(CACHE_LEVEL_NAME)
@@ -39,7 +40,7 @@ public class Templates extends EndpointRouteBuilder {
     routeTemplate("uppercaseTransformation")
         .templateParameter("inqueue")
         .templateParameter("outqueue")
-        .templateParameter("maxConsumers", "5")
+        .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
         .from(jms("{{inqueue}}")
             .transacted(true)
             .cacheLevelName(CACHE_LEVEL_NAME)
@@ -53,7 +54,7 @@ public class Templates extends EndpointRouteBuilder {
         .templateParameter("inqueue")
         .templateParameter("outqueue")
         .templateParameter("splitExpr")
-        .templateParameter("maxConsumers", "5")
+        .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
         .from(jms("{{inqueue}}")
             .transacted(true)
             .cacheLevelName(CACHE_LEVEL_NAME)
