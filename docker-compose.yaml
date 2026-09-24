@@ -1,8 +1,11 @@
 services:
   camel-quarkus:
-    image: ghcr.io/rmortale/camel-quarkus-artemis:main
-    pull_policy: always
+    #image: ghcr.io/rmortale/camel-quarkus-artemis:main
+    image: quarkus/code-with-quarkus-jvm
+    #pull_policy: always
     environment:
       QUARKUS_ARTEMIS_URL: tcp://oravm05:61616
+      QUARKUS_ARTEMIS_USERNAME: artemis
+      QUARKUS_ARTEMIS_PASSWORD: artemis
       QUARKUS_PROFILE: cpvai001d
       QUARKUS_LOG_CATEGORY_UPPERCASETRANSFORMATION_LEVEL: DEBUG
