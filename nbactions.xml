@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-cpvai001d</actionName>
+            <displayName>cpvai001d</displayName>
+            <goals>
+                <goal>quarkus:run</goal>
+            </goals>
+            <properties>
+                <quarkus.profile>cpvai001d</quarkus.profile>
+            </properties>
+        </action>
+    </actions>

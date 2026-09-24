@@ -1,7 +1,6 @@
 services:
   camel-quarkus:
-    image: ghcr.io/rmortale/camel-quarkus-artemis:main-5527f42
-    pull_policy: always
+    image: ghcr.io/rmortale/camel-quarkus-artemis:main-c56698e
     environment:
       QUARKUS_ARTEMIS_URL: tcp://oravm05:61616
       CAMEL_ROUTE_TEMPLATE_4__INQUEUE: quarkin4
