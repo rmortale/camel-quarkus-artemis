@@ -1,9 +1,8 @@
 services:
   camel-quarkus:
-    image: ghcr.io/rmortale/camel-quarkus-artemis:main-c56698e
+    image: ghcr.io/rmortale/camel-quarkus-artemis:main
+    pull_policy: always
     environment:
       QUARKUS_ARTEMIS_URL: tcp://oravm05:61616
-      CAMEL_ROUTE_TEMPLATE_4__INQUEUE: quarkin4
-      CAMEL_ROUTE_TEMPLATE_4__OUTQUEUE: quarkout4
-      CAMEL_ROUTE_TEMPLATE_4__TEMPLATE_ID: uppercaseTransformation
+      QUARKUS_PROFILE: cpvai001d
       QUARKUS_LOG_CATEGORY_UPPERCASETRANSFORMATION_LEVEL: DEBUG
