@@ -6,4 +6,4 @@ patches:
 
 images:
   - name: ghcr.io/rmortale/code-with-quarkus
-    newTag: sha-df55ef6
+    newTag: sha-a6c9481
