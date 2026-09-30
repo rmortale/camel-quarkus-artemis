@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+  name: code-with-quarkus-devt
+  namespace: argocd
+spec:
+  destination:
+    namespace: devt
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: k8s/overlays/devt
+    repoURL: https://github.com/rmortale/camel-quarkus-artemis.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

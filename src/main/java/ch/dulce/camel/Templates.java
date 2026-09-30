@@ -1,9 +1,9 @@
 package ch.dulce.camel;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.endpoint.EndpointRouteBuilder;
-import org.apache.camel.support.builder.Namespaces;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class Templates extends EndpointRouteBuilder {
@@ -50,19 +50,7 @@ public class Templates extends EndpointRouteBuilder {
                 .log(LoggingLevel.DEBUG, "uppercaseTransformation", "${body}")
                 .to(jms("{{outqueue}}"));
 
-        routeTemplate("extractBodyTransformation")
-                .templateParameter("inqueue")
-                .templateParameter("outqueue")
-                .templateParameter("splitExpr")
-                .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
-                .from(jms("{{inqueue}}")
-                        .transacted(true)
-                        .cacheLevelName(CACHE_LEVEL_NAME)
-                        .maxConcurrentConsumers("{{maxConsumers}}")
-                        .advanced().lazyCreateTransactionManager(false))
-                .split().xtokenize("{{splitExpr}}", 'u', new Namespaces())
-                .log(LoggingLevel.DEBUG, "extractBodyTransformation", "${body}")
-                .to(jms("{{outqueue}}"));
+       
     }
 
 }

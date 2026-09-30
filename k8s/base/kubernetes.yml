@@ -1,0 +1,92 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.quarkus.io/quarkus-version: 3.35.2
+    app.quarkus.io/vcs-uri: https://github.com/rmortale/camel-quarkus-artemis.git
+  labels:
+    app.kubernetes.io/name: code-with-quarkus
+    app.kubernetes.io/managed-by: quarkus
+  name: code-with-quarkus
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: code-with-quarkus
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.quarkus.io/quarkus-version: 3.35.2
+    app.quarkus.io/vcs-uri: https://github.com/rmortale/camel-quarkus-artemis.git
+  labels:
+    app.kubernetes.io/name: code-with-quarkus
+    app.kubernetes.io/managed-by: quarkus
+  name: code-with-quarkus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: code-with-quarkus
+  template:
+    metadata:
+      annotations:
+        app.quarkus.io/quarkus-version: 3.35.2
+        app.quarkus.io/vcs-uri: https://github.com/rmortale/camel-quarkus-artemis.git
+      labels:
+        app.kubernetes.io/managed-by: quarkus
+        app.kubernetes.io/name: code-with-quarkus
+    spec:
+      containers:
+        - env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          envFrom:
+            - secretRef:
+                name: artemis-secret
+          image: ghcr.io/rmortale/code-with-quarkus:1.0.0-SNAPSHOT
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /q/health/live
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+          name: code-with-quarkus
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /q/health/ready
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+          startupProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /q/health/started
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+      terminationGracePeriodSeconds: 10
