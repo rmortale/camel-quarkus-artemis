@@ -26,6 +26,7 @@ jobs:
           tags: |
             type=ref,event=branch
             type=sha,prefix={{branch}}-
+            type=sha
 
       - name: Set up JDK
         uses: actions/setup-java@v5

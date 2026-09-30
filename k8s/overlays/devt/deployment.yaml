@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quarkus-jdbc-paramsource
+  name: code-with-quarkus
 spec:
   template:
     spec:
       containers:
-        - name: quarkus-jdbc-paramsource
+        - name: code-with-quarkus
           env:
             - name: APP_AGENT_CONFIG_ID
               value: "agent1"

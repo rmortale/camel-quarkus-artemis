@@ -5,5 +5,5 @@ patches:
   - path: deployment.yaml
 
 images:
-  - name: ghcr.io/rmortale/code-with-quarkus
+  - name: ghcr.io/rmortale/camel-quarkus-artemis
     newTag: sha-a6c9481
