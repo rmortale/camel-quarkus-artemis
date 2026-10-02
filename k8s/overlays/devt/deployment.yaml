@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: code-with-quarkus
+  name: camel-quarkus-artemis
 spec:
   template:
     spec:
       containers:
-        - name: code-with-quarkus
+        - name: camel-quarkus-artemis
           env:
             - name: APP_AGENT_CONFIG_ID
               value: "agent1"
