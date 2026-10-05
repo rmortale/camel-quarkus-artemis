@@ -9,3 +9,20 @@ services:
       QUARKUS_ARTEMIS_PASSWORD: artemis
       QUARKUS_PROFILE: cpvai001d
       QUARKUS_LOG_CATEGORY_UPPERCASETRANSFORMATION_LEVEL: DEBUG
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2048M
+        reservations:
+          cpus: '0.0001'
+          memory: 256M
+
+
+# build jar
+# mvn clean package
+# build image with
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/code-with-quarkus-jvm .
+
+# run with
+# docker compose up

@@ -10,6 +10,7 @@ public class Templates extends EndpointRouteBuilder {
 
     private static final String CACHE_LEVEL_NAME = "CACHE_CONSUMER";
     private static final String DEFAULT_MAX_CONSUMERS = "10";
+    private static final String DEFAULT_MAX_MESSAGE_SIZE_KB = "350000";
 
     private static final String MESSAGE = """
       <object>
@@ -27,14 +28,16 @@ public class Templates extends EndpointRouteBuilder {
         routeTemplate("wrapbodyTransformation")
                 .templateParameter("inqueue")
                 .templateParameter("outqueue")
+                .templateParameter("selector")
                 .templateParameter("maxConsumers", DEFAULT_MAX_CONSUMERS)
                 .from(jms("{{inqueue}}")
+                        .selector("{{selector}}")
                         .transacted(true)
                         .cacheLevelName(CACHE_LEVEL_NAME)
                         .maxConcurrentConsumers("{{maxConsumers}}")
                         .advanced().lazyCreateTransactionManager(false))
                 .transform().simple(MESSAGE)
-                .log(LoggingLevel.DEBUG, "wrapbodyTransformation", "${body}")
+                .log(LoggingLevel.INFO, "wrapbodyTransformation", "${headers}")
                 .to(jms("{{outqueue}}"));
 
         routeTemplate("uppercaseTransformation")
@@ -47,7 +50,7 @@ public class Templates extends EndpointRouteBuilder {
                         .maxConcurrentConsumers("{{maxConsumers}}")
                         .advanced().lazyCreateTransactionManager(false))
                 .transform().simple("${uppercase()}")
-                .log(LoggingLevel.DEBUG, "uppercaseTransformation", "${body}")
+                .log(LoggingLevel.INFO, "uppercaseTransformation", "${headers}")
                 .to(jms("{{outqueue}}"));
 
        
