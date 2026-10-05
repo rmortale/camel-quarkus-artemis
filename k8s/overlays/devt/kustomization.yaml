@@ -6,4 +6,4 @@ patches:
 
 images:
   - name: ghcr.io/rmortale/camel-quarkus-artemis
-    newTag: sha-c5aab98
+    newTag: sha-b47b0f4
